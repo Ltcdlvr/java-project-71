@@ -1,33 +1,85 @@
 package hexlet.code;
 
 
-import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
-import picocli.CommandLine.Parameters;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
+import java.util.*;
+import com.google.gson.*;
 
-@Command(name = "gendiff", mixinStandardHelpOptions = true, version = "checksum 0.1",
-        description = "Compares two configuration files and shows a difference.")
 public class Differ {
 
-    @Option(names = { "-h", "--help" }, usageHelp = true, description = "Show this help message and exit.")
-    private boolean helpRequested = false;
+    public static String generate(Map<String, Object> firstMap, Map<String, Object> secondMap) throws JsonProcessingException {
+        Set<String> firstKeys = new HashSet<>(firstMap.keySet());
+        Set<String> secondKeys = new HashSet<>(secondMap.keySet());
 
-    @Option(names = { "-V", "--version" }, description = "Print version information and exit.")
-    private boolean versionRequest = false;
+        Set<String> intersectionKeys = new HashSet<>(firstKeys);
+        intersectionKeys.retainAll(secondKeys);
 
-    @Option(names = { "-f", "--format" }, defaultValue = "stylish", description = "output format")
-    private String format;
+        class CompositeKey {
+            public final String symbol;
+            public final String key;
+            CompositeKey(String key, String symbol) {
+                this.key = key;
+                this.symbol = symbol;
+            }
 
-    @Parameters(paramLabel = "filepath1", description = "path to first file")
-    String filePath1;
+            @Override
+            public String toString() {
+                return symbol + " " + key;
+            }
+        }
 
-    @Parameters(paramLabel = "filepath2", description = "path to second file")
-    String filePath2;
+        // result
+        SortedMap<CompositeKey, String> sortedResult = new TreeMap<>(new Comparator<CompositeKey>() {
+            @Override
+            public int compare(CompositeKey o1, CompositeKey o2) {
+                if (o1.key.equals(o2.key)) {
+                    return -o1.symbol.compareTo(o2.symbol);
+                }
+                return o1.key.compareTo(o2.key);
+            }
+        });
 
-    public static void generate(String filePath1, String filePath2) {
-        return;
+        // deleted keys
+        firstKeys.removeAll(intersectionKeys);
+        for (String deletedKey: firstKeys) {
+            sortedResult.put(new CompositeKey(deletedKey, "-"), firstMap.get(deletedKey).toString());
+        }
+
+        // added keys
+        secondKeys.removeAll(intersectionKeys);
+        for (String addedKey: secondKeys) {
+            sortedResult.put(new CompositeKey(addedKey, "+"), secondMap.get(addedKey).toString());
+        }
+
+        for (String key: intersectionKeys) {
+            Object firstObj = firstMap.get(key);
+            Object secondObj = secondMap.get(key);
+
+            if (firstObj.equals(secondObj)) {
+//                sortedResult.put(key, "unchanged");
+                sortedResult.put(new CompositeKey(key, " "), secondMap.get(key).toString());
+            } else {
+//                sortedResult.put(key, "changed");
+                sortedResult.put(new CompositeKey(key, "-"), firstMap.get(key).toString());
+                sortedResult.put(new CompositeKey(key, "+"), secondMap.get(key).toString());
+            }
+        }
+
+//        System.out.println(sortedResult);
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        String strRes = objectMapper.writeValueAsString(sortedResult);
+//        System.out.println(strRes);
+//
+//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//        JsonElement je = JsonParser.parseString(sortedResult.toString());
+//        String prettyJsonString = gson.toJson(je);
+//
+//        System.out.println(prettyJsonString);
+
+        return sortedResult.toString();
     }
 
 
