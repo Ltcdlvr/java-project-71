@@ -26,7 +26,7 @@ public class AppTest {
     void testMain() {
         App ap = new App();
         int exitCode = new CommandLine(ap).execute("./src/test/resources/1.json",
-                "/Users/mka/hexlet/java/java-project-71/src/test/resources/2.json");
+                "./src/test/resources/2.json");
 //        System.exit(exitCode);
         assertEquals("{- follow=false,   host=hexlet.io, - proxy=123.234.53.22, - timeout=50, + timeout=20, "
                 + "+ verbose=true}", output.toString(StandardCharsets.UTF_8).trim());
