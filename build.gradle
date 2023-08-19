@@ -1,40 +1,16 @@
 plugins {
-    id 'java'
-}
-
-plugins {
-    id 'application'
-}
-
-plugins {
-    id 'checkstyle'
-}
-
-plugins {
     id 'jacoco'
-}
-
-application {
-    mainClass = 'hexlet.code.App'
-}
-
-tasks.named('test', Test) {
-    useJUnitPlatform()
-}
-
-test {
-    finalizedBy jacocoTestReport // report is always generated after tests run
-}
-jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
-}
-
-compileJava {
-    options.release = 17
+    id 'checkstyle'
+    id 'application'
+    id 'java'
 }
 
 group = 'hexlet.code'
 version = '1.0-SNAPSHOT'
+
+application { mainClass = 'hexlet.code.App' }
+
+compileJava { options.release = 17 }
 
 repositories {
     mavenCentral()
@@ -50,7 +26,28 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-test {
+//tasks.named('test', Test) {
+//    useJUnitPlatform()
+//}
+
+tasks.test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport // report is always generated after tests run
 }
+
+//test {
+//    finalizedBy jacocoTestReport // report is always generated after tests run
+//}
+
+
+tasks.jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+    reports {
+        xml.required = true
+    }
+}
+
+//test {
+//    useJUnitPlatform()
+//}
 
