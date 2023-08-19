@@ -10,12 +10,23 @@ plugins {
     id 'checkstyle'
 }
 
+plugins {
+    id 'jacoco'
+}
+
 application {
     mainClass = 'hexlet.code.App'
 }
 
 tasks.named('test', Test) {
     useJUnitPlatform()
+}
+
+test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
 }
 
 compileJava {
