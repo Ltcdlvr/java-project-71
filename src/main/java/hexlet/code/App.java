@@ -12,7 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
@@ -50,8 +49,8 @@ public class App implements Callable<Integer> {
         String content2 = Files.readString(path2);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> firstJson = objectMapper.readValue(content1, new TypeReference<Map<String,Object>>(){});
-        Map<String, Object> secondJson = objectMapper.readValue(content2, new TypeReference<Map<String,Object>>(){});
+        Map<String, Object> firstJson = objectMapper.readValue(content1, new TypeReference<Map<String, Object>>() { });
+        Map<String, Object> secondJson = objectMapper.readValue(content2, new TypeReference<Map<String, Object>>() { });
 
         String res = Differ.generate(firstJson, secondJson);
         System.out.println(res.toString());
@@ -65,7 +64,7 @@ public class App implements Callable<Integer> {
         App ap = new App();
 //        int exitCode = new CommandLine(ap).execute("-f=dskmwe", "aa", "bb");
 //        System.exit(exitCode);
-        int exitCode = new CommandLine(ap).execute("./src/main/resources/1.json",
-                "/Users/mka/hexlet/java/java-project-71/app/src/main/resources/2.json");
+        int exitCode = new CommandLine(ap).execute("./src/test/resources/1.json",
+                "/Users/mka/hexlet/java/java-project-71/src/test/resources/2.json");
     }
 }

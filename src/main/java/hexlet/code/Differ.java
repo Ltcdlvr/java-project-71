@@ -2,14 +2,22 @@ package hexlet.code;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.*;
-import com.google.gson.*;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import  java.util.Comparator;
+//import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+//import com.google.gson.*;
 
 public class Differ {
 
-    public static String generate(Map<String, Object> firstMap, Map<String, Object> secondMap) throws JsonProcessingException {
+    public static String generate(Map<String, Object> firstMap, Map<String, Object> secondMap)
+            throws JsonProcessingException {
         Set<String> firstKeys = new HashSet<>(firstMap.keySet());
         Set<String> secondKeys = new HashSet<>(secondMap.keySet());
 
