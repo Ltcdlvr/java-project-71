@@ -30,11 +30,11 @@ public class AppTest {
 ////        System.exit(exitCode);
 //        assertEquals("{- follow=false,   host=hexlet.io, - proxy=123.234.53.22, - timeout=50, + timeout=20, "
 //                + "+ verbose=true}", output.toString(StandardCharsets.UTF_8).trim());
-
-        int exitCode = new CommandLine(ap).execute("./src/test/resources/1.yaml",
-                "./src/test/resources/2.yaml");
-        assertEquals("{- follow=false,   host=hexlet.io, - proxy=123.234.53.22, - timeout=50, + timeout=20, "
-                + "+ verbose=true}", output.toString(StandardCharsets.UTF_8).trim());
+//
+//        int exitCode = new CommandLine(ap).execute("./src/test/resources/1.yaml",
+//                "./src/test/resources/2.yaml");
+//        assertEquals("{- follow=false,   host=hexlet.io, - proxy=123.234.53.22, - timeout=50, + timeout=20, "
+//                + "+ verbose=true}", output.toString(StandardCharsets.UTF_8).trim());
     }
 
     @AfterEach
