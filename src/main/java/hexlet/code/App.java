@@ -6,6 +6,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
+import java.util.Map;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "0.1",
@@ -37,17 +38,10 @@ public class App implements Callable<Integer> {
         return 0;
     }
 
-    public static void main(String[] args) {
-//        System.out.println("Hello World");
-        App ap = new App();
-//        int exitCode = new CommandLine(ap).execute("-f=dskmwe", "aa", "bb");
-//        System.exit(exitCode);
-//        int exitCode = new CommandLine(ap).execute("./src/test/resources/1.json",
+//    public static void main(String[] args) {
+//        App ap = new App();
+//        int exitCode = new CommandLine(ap).execute("-f=json",
+//                "./src/test/resources/1.json",
 //                "/Users/mka/hexlet/java/java-project-71/src/test/resources/2.json");
-//        int exitCode = new CommandLine(ap).execute("./src/test/resources/1.yaml",
-//                "/Users/mka/hexlet/java/java-project-71/src/test/resources/2.yaml");
-        int exitCode = new CommandLine(ap).execute("-f=json",
-                "./src/test/resources/file1.yml",
-                "/Users/mka/hexlet/java/java-project-71/src/test/resources/file2.yml");
-    }
+//    }
 }
