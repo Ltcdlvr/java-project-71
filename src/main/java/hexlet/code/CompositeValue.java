@@ -45,6 +45,10 @@ public class CompositeValue {
         } else {
             return this.oldValue.equals(cvObj.oldValue);
         }
+    }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }
