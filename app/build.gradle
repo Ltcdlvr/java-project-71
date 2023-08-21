@@ -10,7 +10,7 @@ version = '1.0-SNAPSHOT'
 
 application { mainClass = 'hexlet.code.App' }
 
-compileJava { options.release = 19 }
+compileJava { options.release = 18 }
 
 repositories {
     mavenCentral()
