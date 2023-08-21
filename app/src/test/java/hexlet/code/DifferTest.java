@@ -47,7 +47,7 @@ public class DifferTest {
     void testDifferStylish() throws Exception {
 
         String diff = Differ.generate("./src/test/resources/1.json",
-                "./src/test/resources/2.json", Formatter.getFormatter("stylish"));
+                "./src/test/resources/2.json", "stylish");
 
         String expected = "{\n"
                 + "\t- follow: false\n"
@@ -66,7 +66,7 @@ public class DifferTest {
     void testDifferPlain() throws Exception {
 
         String diff = Differ.generate("./src/test/resources/1.json",
-                "./src/test/resources/2.json", Formatter.getFormatter("plain"));
+                "./src/test/resources/2.json", "plain");
 
         String expected = "Property 'follow' was removed\n"
                 + "Property 'host' was unchanged with value: 'hexlet.io'\n"
@@ -82,7 +82,7 @@ public class DifferTest {
     void testDifferJsonFormat() throws Exception {
 
         String diff = Differ.generate("./src/test/resources/1.json",
-                "./src/test/resources/2.json", Formatter.getFormatter("json"));
+                "./src/test/resources/2.json", "json");
 
         String expected = "{\"follow\":{\"oldValue\":\"false\",\"newValue\":null},\"host\":{\"oldValue\":"
                 + "\"hexlet.io\",\"newValue\":\"hexlet.io\"},\"proxy\":{\"oldValue\":\"123.234.53.22\","

@@ -29,7 +29,7 @@ public class App implements Callable<Integer> {
     @Override
     public Integer call() {
         try {
-            System.out.println(Differ.generate(firstURI, secondURI, Formatter.getFormatter(format)));
+            System.out.println(Differ.generate(firstURI, secondURI, format));
         } catch (Exception e) {
             System.out.println("Something was wrong. But it's ok.");
         }
