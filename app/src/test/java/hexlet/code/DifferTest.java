@@ -69,10 +69,9 @@ public class DifferTest {
                 "./src/test/resources/2.json", "plain");
 
         String expected = "Property 'follow' was removed\n"
-                + "Property 'host' was unchanged with value: 'hexlet.io'\n"
                 + "Property 'proxy' was removed\n"
-                + "Property 'timeout' was updated. From '50' to '20'\n"
-                + "Property 'verbose' was added with value: 'true'";
+                + "Property 'timeout' was updated. From 50 to 20\n"
+                + "Property 'verbose' was added with value: true";
 
         assertTrue(diff.equals(expected));
     }

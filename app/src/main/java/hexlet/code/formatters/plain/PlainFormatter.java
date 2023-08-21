@@ -3,6 +3,7 @@ package hexlet.code.formatters.plain;
 import hexlet.code.CompositeValue;
 import hexlet.code.formatters.FormatterInterface;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -17,6 +18,18 @@ public class PlainFormatter implements FormatterInterface {
         if (obj.contains("[") || obj.contains("{")) {
             return "[complex value]";
         }
+
+        try {
+            Double.valueOf(obj);
+            return obj;
+        } catch (NumberFormatException ignored) {
+        }
+
+        List<String> tokens = List.of("true", "false");
+        if (tokens.contains(obj)) {
+            return obj;
+        }
+
         return "'" + obj + "'";
     }
 
@@ -34,7 +47,7 @@ public class PlainFormatter implements FormatterInterface {
             } else if (Objects.isNull(oldValue)) {
                 result.add("Property '" + line.getKey() + "' was added with value: " + getPlainValue(newValue));
             } else if (newValue.equals(oldValue)) {
-                result.add("Property '" + line.getKey() + "' was unchanged with value: " + getPlainValue(oldValue));
+//                result.add("Property '" + line.getKey() + "' was unchanged with value: " + getPlainValue(oldValue));
             } else {
                 result.add("Property '" + line.getKey() + "' was updated. From "
                         + getPlainValue(oldValue) + " to " + getPlainValue(newValue));
