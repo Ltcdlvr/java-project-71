@@ -11,9 +11,6 @@ import java.util.StringJoiner;
 public final class PlainFormatter implements FormatterInterface {
 
     private static String getPlainValue(String obj) {
-        if (Objects.isNull(obj)) {
-            return "null";
-        }
 
         if (obj.contains("[") || obj.contains("{")) {
             return "[complex value]";

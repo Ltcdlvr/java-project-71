@@ -2,7 +2,7 @@ package hexlet.code;
 
 import java.util.Objects;
 
-public class CompositeValue {
+public final class CompositeValue {
     public String getOldValue() {
         return oldValue;
     }
@@ -20,12 +20,12 @@ public class CompositeValue {
     }
 
     @Override
-    public final String toString() {
+    public String toString() {
         return oldValue + " - " + newValue;
     }
 
     @Override
-    public final boolean equals(Object obj) {
+    public boolean equals(Object obj) {
         if (Objects.isNull(obj) || (!obj.getClass().equals(CompositeValue.class))) {
             return false;
         }
@@ -56,7 +56,7 @@ public class CompositeValue {
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         return super.hashCode();
     }
 }
