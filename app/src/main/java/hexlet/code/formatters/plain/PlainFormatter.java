@@ -25,7 +25,7 @@ public class PlainFormatter implements FormatterInterface {
         } catch (NumberFormatException ignored) {
         }
 
-        List<String> tokens = List.of("true", "false, null");
+        List<String> tokens = List.of("true", "false", "null");
         if (tokens.contains(obj)) {
             return obj;
         }
