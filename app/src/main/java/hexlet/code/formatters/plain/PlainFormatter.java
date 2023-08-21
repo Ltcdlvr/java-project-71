@@ -46,9 +46,9 @@ public class PlainFormatter implements FormatterInterface {
                 result.add("Property '" + line.getKey() + "' was removed");
             } else if (Objects.isNull(oldValue)) {
                 result.add("Property '" + line.getKey() + "' was added with value: " + getPlainValue(newValue));
-            } else if (newValue.equals(oldValue)) {
+//            } else if (newValue.equals(oldValue)) {
 //                result.add("Property '" + line.getKey() + "' was unchanged with value: " + getPlainValue(oldValue));
-            } else {
+            } else if (!newValue.equals(oldValue)) {
                 result.add("Property '" + line.getKey() + "' was updated. From "
                         + getPlainValue(oldValue) + " to " + getPlainValue(newValue));
             }
