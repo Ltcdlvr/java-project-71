@@ -19,14 +19,14 @@ public class StylishFormatter implements FormatterInterface {
             String newValue = val.newValue;
 
             if (Objects.isNull(newValue)) {
-                result.add("\t- " + line.getKey() + ": " + oldValue);
+                result.add("  - " + line.getKey() + ": " + oldValue);
             } else if (Objects.isNull(oldValue)) {
-                result.add("\t+ " + line.getKey() + ": " + newValue);
+                result.add("  + " + line.getKey() + ": " + newValue);
             } else if (newValue.equals(oldValue)) {
-                result.add("\t  " + line.getKey() + ": " + oldValue);
+                result.add("    " + line.getKey() + ": " + oldValue);
             } else {
-                result.add("\t- " + line.getKey() + ": " + oldValue);
-                result.add("\t+ " + line.getKey() + ": " + newValue);
+                result.add("  - " + line.getKey() + ": " + oldValue);
+                result.add("  + " + line.getKey() + ": " + newValue);
             }
         }
         result.add("}");
