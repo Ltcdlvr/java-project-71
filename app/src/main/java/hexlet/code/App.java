@@ -1,5 +1,6 @@
 package hexlet.code;
 
+//import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
@@ -39,6 +40,6 @@ public class App implements Callable<Integer> {
 //        App ap = new App();
 //        int exitCode = new CommandLine(ap).execute("-f=json",
 //                "./src/test/resources/1.json",
-//                "/Users/mka/hexlet/java/java-project-71/src/test/resources/2.json");
+//                "./src/test/resources/2.json");
 //    }
 }
