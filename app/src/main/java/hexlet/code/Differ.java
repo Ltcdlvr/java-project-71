@@ -11,6 +11,13 @@ import java.util.TreeMap;
 
 public class Differ {
 
+    public static String generate(String firstURI, String secondURI) throws Exception {
+        FormatterInterface formatter = Formatter.getFormatter("stylish");
+        Map<String, Object> firstObject = Parser.parseFile(firstURI);
+        Map<String, Object> secondObject = Parser.parseFile(secondURI);
+        Map<String, CompositeValue> actualDiff = Differ.findDiff(firstObject, secondObject);
+        return formatter.getString(actualDiff);
+    }
     public static String generate(String firstURI, String secondURI, String formatName) throws Exception {
         FormatterInterface formatter = Formatter.getFormatter(formatName);
         Map<String, Object> firstObject = Parser.parseFile(firstURI);
