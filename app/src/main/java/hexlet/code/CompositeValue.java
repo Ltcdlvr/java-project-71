@@ -12,12 +12,12 @@ public class CompositeValue {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return oldValue + " - " + newValue;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public final boolean equals(Object obj) {
         if (Objects.isNull(obj) || (!obj.getClass().equals(CompositeValue.class))) {
             return false;
         }
@@ -48,7 +48,7 @@ public class CompositeValue {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return super.hashCode();
     }
 }

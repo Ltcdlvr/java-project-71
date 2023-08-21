@@ -9,7 +9,7 @@ import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "0.1",
         description = "Compares two configuration files and shows a difference.")
-public class App implements Callable<Integer> {
+public final class App implements Callable<Integer> {
 
     @Option(names = { "-h", "--help" }, usageHelp = true, description = "Show this help message and exit.")
     private boolean helpRequested = false;
@@ -21,10 +21,10 @@ public class App implements Callable<Integer> {
     private String format;
 
     @Parameters(paramLabel = "filepath1", description = "path to first file")
-    String firstURI;
+    private String firstURI;
 
     @Parameters(paramLabel = "filepath2", description = "path to second file")
-    String secondURI;
+    private String secondURI;
 
     @Override
     public Integer call() {

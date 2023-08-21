@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class PlainFormatter implements FormatterInterface {
+public final class PlainFormatter implements FormatterInterface {
 
     private static String getPlainValue(String obj) {
         if (Objects.isNull(obj)) {
@@ -25,8 +25,7 @@ public class PlainFormatter implements FormatterInterface {
         } catch (NumberFormatException ignored) {
         }
 
-        List<String> tokens = List.of("true", "false", "null");
-        if (tokens.contains(obj)) {
+        if (List.of("true", "false", "null").contains(obj)) {
             return obj;
         }
 

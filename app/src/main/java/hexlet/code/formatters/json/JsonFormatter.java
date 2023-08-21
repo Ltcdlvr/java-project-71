@@ -7,7 +7,7 @@ import hexlet.code.formatters.FormatterInterface;
 
 import java.util.Map;
 
-public class JsonFormatter implements FormatterInterface {
+public final class JsonFormatter implements FormatterInterface {
 
     public String getString(Map<String, CompositeValue> diff) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();

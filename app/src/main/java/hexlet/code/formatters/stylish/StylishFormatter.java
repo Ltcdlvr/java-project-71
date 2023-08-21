@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class StylishFormatter implements FormatterInterface {
+public final class StylishFormatter implements FormatterInterface {
     public String getString(Map<String, CompositeValue> diff) {
         StringJoiner result = new StringJoiner("\n");
         result.add("{");
