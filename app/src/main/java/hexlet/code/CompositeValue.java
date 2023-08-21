@@ -3,8 +3,16 @@ package hexlet.code;
 import java.util.Objects;
 
 public class CompositeValue {
-    public final String oldValue;
-    public final String newValue;
+    public String getOldValue() {
+        return oldValue;
+    }
+
+    public String getNewValue() {
+        return newValue;
+    }
+
+    private final String oldValue;
+    private final String newValue;
 
     CompositeValue(String oldValue, String newValue) {
         this.oldValue = oldValue;

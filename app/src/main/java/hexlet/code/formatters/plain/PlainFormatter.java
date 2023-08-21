@@ -38,8 +38,8 @@ public final class PlainFormatter implements FormatterInterface {
         for (Map.Entry<String, CompositeValue> line: diff.entrySet()) {
             CompositeValue val = line.getValue();
 
-            String oldValue = val.oldValue;
-            String newValue = val.newValue;
+            String oldValue = val.getOldValue();
+            String newValue = val.getNewValue();
 
             if (Objects.isNull(newValue)) {
                 result.add("Property '" + line.getKey() + "' was removed");
