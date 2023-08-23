@@ -24,7 +24,7 @@ public class DifferTest {
                         new CompositeValue("follow", "sometype", false, null),
                         new CompositeValue("host", "sometype", "hexlet.io", "hexlet.io"),
                         new CompositeValue("proxy", "sometype", "123.234.53.22", null),
-                        new CompositeValue("timeout", "sometype", 50, 20),
+                        new CompositeValue("timeout", "sometype", "50", "20"),
                         new CompositeValue("verbose", "sometype", null, true)
                 )
         );
@@ -57,7 +57,7 @@ public class DifferTest {
                         new CompositeValue("follow", "sometype", false, null),
                         new CompositeValue("host", "sometype", "hexlet.io", "hexlet.io"),
                         new CompositeValue("proxy", "sometype", "123.234.53.22", null),
-                        new CompositeValue("timeout", "sometype", 50, 20),
+                        new CompositeValue("timeout", "sometype", "50", "20"),
                         new CompositeValue("verbose", "sometype", null, true)
                 )
         );
@@ -92,7 +92,7 @@ public class DifferTest {
 
         String expected = "Property 'follow' was removed\n"
                 + "Property 'proxy' was removed\n"
-                + "Property 'timeout' was updated. From 50 to 20\n"
+                + "Property 'timeout' was updated. From '50' to '20'\n"
                 + "Property 'verbose' was added with value: true";
 
         assertTrue(diff.equals(expected));
