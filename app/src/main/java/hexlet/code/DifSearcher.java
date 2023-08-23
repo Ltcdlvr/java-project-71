@@ -19,9 +19,9 @@ public class DifSearcher {
             Object firstObject = firstMap.get(key);
             Object secondObject = secondMap.get(key);
 
-            if (Objects.isNull(firstObject)) {
+            if (!firstMap.containsKey(key)) {
                 sortedResult.add(new CompositeValue(key, "added", null, secondObject));
-            } else if (Objects.isNull(secondObject)) {
+            } else if (!secondMap.containsKey(key)) {
                 sortedResult.add(new CompositeValue(key, "deleted", firstObject, null));
             } else if (firstObject.equals(secondObject)) {
                 sortedResult.add(new CompositeValue(key, "unchanged", firstObject, secondObject));
