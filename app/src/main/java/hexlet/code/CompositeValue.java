@@ -3,25 +3,35 @@ package hexlet.code;
 import java.util.Objects;
 
 public final class CompositeValue {
-    public String getOldValue() {
+
+    private final String key;
+    private final String type;
+    private final Object oldValue;
+    private final Object newValue;
+
+    public String getKey() {
+        return key;
+    }
+    public String getType() {
+        return type;
+    }
+    public Object getOldValue() {
         return oldValue;
     }
-
-    public String getNewValue() {
+    public Object getNewValue() {
         return newValue;
     }
 
-    private final String oldValue;
-    private final String newValue;
-
-    CompositeValue(String oldValue, String newValue) {
+    CompositeValue(String key, String type, Object oldValue, Object newValue) {
+        this.key = key;
+        this.type = type;
         this.oldValue = oldValue;
         this.newValue = newValue;
     }
 
     @Override
     public String toString() {
-        return oldValue + " - " + newValue;
+        return key + " - " + oldValue + " - " + newValue;
     }
 
     @Override
@@ -30,6 +40,10 @@ public final class CompositeValue {
             return false;
         }
         CompositeValue cvObj = (CompositeValue) obj;
+
+        if (!this.key.equals(cvObj.getKey())) {
+            return false;
+        }
 
         if (!Objects.isNull(this.oldValue) && !Objects.isNull(this.newValue)) {
             return this.newValue.equals(cvObj.newValue)

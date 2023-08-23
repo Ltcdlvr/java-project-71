@@ -3,30 +3,29 @@ package hexlet.code.formatters.stylish;
 import hexlet.code.CompositeValue;
 import hexlet.code.formatters.FormatterInterface;
 
-import java.util.Map;
-import java.util.Objects;
+import java.util.List;
 import java.util.StringJoiner;
 
 public final class StylishFormatter implements FormatterInterface {
-    public String getString(Map<String, CompositeValue> diff) {
+    public String render(List<CompositeValue> diff) {
         StringJoiner result = new StringJoiner("\n");
         result.add("{");
 
-        for (Map.Entry<String, CompositeValue> line: diff.entrySet()) {
-            CompositeValue val = line.getValue();
+        for (CompositeValue line: diff) {
+            String format = line.getType();
+            Object oldValue = line.getOldValue();
+            Object newValue = line.getNewValue();
 
-            String oldValue = val.getOldValue();
-            String newValue = val.getNewValue();
-
-            if (Objects.isNull(newValue)) {
-                result.add("  - " + line.getKey() + ": " + oldValue);
-            } else if (Objects.isNull(oldValue)) {
-                result.add("  + " + line.getKey() + ": " + newValue);
-            } else if (newValue.equals(oldValue)) {
-                result.add("    " + line.getKey() + ": " + oldValue);
-            } else {
-                result.add("  - " + line.getKey() + ": " + oldValue);
-                result.add("  + " + line.getKey() + ": " + newValue);
+            switch (format) {
+                case "added" -> result.add("  + " + line.getKey() + ": " + newValue);
+                case "deleted" -> result.add("  - " + line.getKey() + ": " + oldValue);
+                case "unchanged" -> result.add("    " + line.getKey() + ": " + oldValue);
+                case "changed" -> {
+                    result.add("  - " + line.getKey() + ": " + oldValue);
+                    result.add("  + " + line.getKey() + ": " + newValue);
+                }
+                default -> {
+                }
             }
         }
         result.add("}");

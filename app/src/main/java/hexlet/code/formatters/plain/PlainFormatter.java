@@ -10,43 +10,41 @@ import java.util.StringJoiner;
 
 public final class PlainFormatter implements FormatterInterface {
 
-    private static String getPlainValue(String obj) {
+    private static String getPlainValue(Object obj) {
 
-        if (obj.contains("[") || obj.contains("{")) {
+        if (Objects.isNull(obj)) {
+            return "null";
+        }
+
+        if (obj instanceof String) {
+            return "'" + obj + "'";
+        }
+
+        if (obj instanceof Map || obj instanceof List) {
             return "[complex value]";
         }
 
-        try {
-            Double.valueOf(obj);
-            return obj;
-        } catch (NumberFormatException ignored) {
-        }
-
-        if (List.of("true", "false", "null").contains(obj)) {
-            return obj;
-        }
-
-        return "'" + obj + "'";
+        return obj.toString();
     }
 
-    public String getString(Map<String, CompositeValue> diff) {
+    public String render(List<CompositeValue> diff) {
         StringJoiner result = new StringJoiner("\n");
 
-        for (Map.Entry<String, CompositeValue> line: diff.entrySet()) {
-            CompositeValue val = line.getValue();
+        for (CompositeValue line: diff) {
+            String format = line.getType();
+            Object oldValue = line.getOldValue();
+            Object newValue = line.getNewValue();
 
-            String oldValue = val.getOldValue();
-            String newValue = val.getNewValue();
-
-            if (Objects.isNull(newValue)) {
-                result.add("Property '" + line.getKey() + "' was removed");
-            } else if (Objects.isNull(oldValue)) {
-                result.add("Property '" + line.getKey() + "' was added with value: " + getPlainValue(newValue));
-//            } else if (newValue.equals(oldValue)) {
-//                result.add("Property '" + line.getKey() + "' was unchanged with value: " + getPlainValue(oldValue));
-            } else if (!newValue.equals(oldValue)) {
-                result.add("Property '" + line.getKey() + "' was updated. From "
-                        + getPlainValue(oldValue) + " to " + getPlainValue(newValue));
+            switch (format) {
+                case "added" ->
+                        result.add("Property '" + line.getKey() + "' was added with value: " + getPlainValue(newValue));
+                case "deleted" ->
+                        result.add("Property '" + line.getKey() + "' was removed");
+                case "changed" ->
+                        result.add("Property '" + line.getKey() + "' was updated. From "
+                                + getPlainValue(oldValue) + " to " + getPlainValue(newValue));
+                default -> {
+                }
             }
         }
         return result.toString();

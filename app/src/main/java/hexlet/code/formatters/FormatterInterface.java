@@ -3,9 +3,8 @@ package hexlet.code.formatters;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import hexlet.code.CompositeValue;
 
-import java.util.Map;
+import java.util.List;
 
-@FunctionalInterface
 public interface FormatterInterface {
-    String getString(Map<String, CompositeValue> diff) throws JsonProcessingException;
+    String render(List<CompositeValue> diff) throws JsonProcessingException;
 }

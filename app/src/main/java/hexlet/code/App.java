@@ -39,5 +39,8 @@ public final class App implements Callable<Integer> {
     public static void main(String[] args) {
         App ap = new App();
         int exitCode = new CommandLine(ap).execute(args);
+//        int exitCode = new CommandLine(ap).execute(
+//                "./src/test/resources/1.json",
+//                "./src/test/resources/2.json");
     }
 }
