@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class DifSearcher {
     public static List<CompositeValue> findDiff(Map<String, Object> firstMap, Map<String, Object> secondMap) {
@@ -19,15 +18,16 @@ public class DifSearcher {
             Object firstObject = firstMap.get(key);
             Object secondObject = secondMap.get(key);
 
+            String type = "changed";
             if (!firstMap.containsKey(key)) {
-                sortedResult.add(new CompositeValue(key, "added", null, secondObject));
+                type = "added";
             } else if (!secondMap.containsKey(key)) {
-                sortedResult.add(new CompositeValue(key, "deleted", firstObject, null));
+                type = "deleted";
             } else if (firstObject.equals(secondObject)) {
-                sortedResult.add(new CompositeValue(key, "unchanged", firstObject, secondObject));
-            } else {
-                sortedResult.add(new CompositeValue(key, "changed", firstObject, secondObject));
+                type = "unchanged";
             }
+
+            sortedResult.add(new CompositeValue(key, type, firstObject, secondObject));
         }
 
         return sortedResult;
