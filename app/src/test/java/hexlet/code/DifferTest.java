@@ -98,19 +98,21 @@ public class DifferTest {
         assertTrue(diff.equals(expected));
     }
 
-//    @Test
-//    @DisplayName("test Differ Json format")
-//    void testDifferJsonFormat() throws Exception {
-//
-//        String diff = Differ.generate("./src/test/resources/1.json",
-//                "./src/test/resources/2.json", "json");
-//
-//        String expected = "{\"follow\":{\"oldValue\":\"false\",\"newValue\":null},\"host\":{\"oldValue\":"
-//                + "\"hexlet.io\",\"newValue\":\"hexlet.io\"},\"proxy\":{\"oldValue\":\"123.234.53.22\","
-//                + "\"newValue\":null},\"timeout\":{\"oldValue\":\"50\",\"newValue\":\"20\"},\"verbose\""
-//                + ":{\"oldValue\":null,\"newValue\":\"true\"}}";
-//
-//        assertTrue(diff.equals(expected));
-//    }
+    @Test
+    @DisplayName("test Differ Json format")
+    void testDifferJsonFormat() throws Exception {
+
+        String diff = Differ.generate("./src/test/resources/1.json",
+                "./src/test/resources/2.json", "json");
+
+        System.out.println(diff);
+        String expected = "[{\"key\":\"follow\",\"type\":\"deleted\",\"oldValue\":false,\"newValue\":null},"
+                + "{\"key\":\"host\",\"type\":\"unchanged\",\"oldValue\":\"hexlet.io\",\"newValue\":\"hexlet.io\"},"
+                + "{\"key\":\"proxy\",\"type\":\"deleted\",\"oldValue\":\"123.234.53.22\",\"newValue\":null},"
+                + "{\"key\":\"timeout\",\"type\":\"changed\",\"oldValue\":\"50\",\"newValue\":\"20\"},"
+                + "{\"key\":\"verbose\",\"type\":\"added\",\"oldValue\":null,\"newValue\":true}]";
+
+        assertTrue(diff.equals(expected));
+    }
 }
 
